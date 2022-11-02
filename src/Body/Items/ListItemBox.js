@@ -7,13 +7,13 @@ import {
 	ItemNameStyled,
 	PinkButton,
 } from "../../styles/MuiStyles";
-import Basket from "./Basket";
+import Basket from "../Basket/Basket";
 
 import DeleteItemDialog from "./DeleteItemDialog";
 import EditItemForm from "./EditItemForm";
 
 const ListItemBox = ({ item }) => {
-	
+
 	const userId = useSelector((state) => state?.user?.userId);
 
 	return (
@@ -34,19 +34,19 @@ const ListItemBox = ({ item }) => {
 			/>
 
 			<ItemDataStyled className="m-1">
-				{item.price} per {item.unit}
+				{item.price} € per {item.unit}
 			</ItemDataStyled>
 
 			<ItemDataStyled className="m-1 mb-3">{item.note}</ItemDataStyled>
 
-			{userId ? (
+			{userId === item.createUser ? (
 				<div>
 					<EditItemForm item={item} />
 
 					<DeleteItemDialog item={item} />
 				</div>
 			) : (
-				<Basket />
+				<Basket item={item} />
 			)}
 		</BoxStyled>
 	);

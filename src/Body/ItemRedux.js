@@ -25,7 +25,7 @@ export const AddNewItem = createAsyncThunk(
 			const result = await axios.post(
 				"/item/create",
 				{ item: itemData },
-				//config()
+				config()
 				
 			);
 			console.log(result)
@@ -44,7 +44,7 @@ export const GetListItems = createAsyncThunk(
 
 		try {
 			const result = await axios.get("/item/list-items", 
-			// config()
+			config()
 			);
 
 			let listItems = result?.data?.listItems;
@@ -90,7 +90,7 @@ export const SaveEditedItem = createAsyncThunk(
 			const result = await axios.post(
 				`/item/edit?itemId=${itemId}`,
 				{ item: editedItemData },
-				// config()
+				config()
 			);
 
 			thunkAPI.dispatch(GetListItems());

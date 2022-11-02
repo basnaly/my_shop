@@ -12,7 +12,7 @@ const Header = () => {
 	const userId = useSelector(state => state?.user?.userId)
 
 	return (
-		<HeaderStyled className="d-flex align-items-center justify-content-between ps-2">
+		<HeaderStyled className="d-flex align-items-center justify-content-between px-2 pt-1">
 			<div>MyShop 🛍</div>
 			<AddItemDialog />
 			{

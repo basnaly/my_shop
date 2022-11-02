@@ -38,6 +38,11 @@ const AddItemDialog = () => {
 	const saveItem = () => {
 		dispatch(AddNewItem( {itemName, image, price, unit, note} ));
 		closeDialog()
+		setItemName('')
+		setImage('')
+		setPrice('')
+		setUnit('kg')
+		setNote('')
 		dispatch(GetListItems())
 	};
 

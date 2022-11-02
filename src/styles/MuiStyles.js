@@ -38,6 +38,15 @@ export const AuthButton = styled(Button)({
 	padding: "2px 7px",
 });
 
+export const BasketButton = styled(Button)({
+	textTransform: "none",
+	color: "yellow",
+	border: "1px solid dimgray",
+	fontSize: "28px",
+	backgroundColor: "darkgray",
+	padding: "3px 10px",
+});
+
 export const PaperStyled = styled(Paper)({
 	padding: "10px",
 	margin: "10px",

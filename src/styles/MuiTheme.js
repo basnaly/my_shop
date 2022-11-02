@@ -43,6 +43,16 @@ export const myTheme = createTheme({
                     color: 'forestgreen',
                 },
             }
+        },
+        MuiBadge: {
+            styleOverrides: {
+                badge: {
+                    color: 'white',
+                    backgroundColor: 'hotpink',
+                    fontWeight: 'bold',
+                    fontSize: "16px",
+                },
+            }
         }
 	},
 });

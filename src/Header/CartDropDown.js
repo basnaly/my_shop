@@ -1,14 +1,28 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from "react";
 
-import ShoppingBasketTwoToneIcon from '@mui/icons-material/ShoppingBasketTwoTone';
-import { ClickAwayListener, Grow, IconButton, MenuList, Popper } from '@mui/material';
-import { PaperStyled } from '../styles/MuiStyles';
-import { useSelector } from 'react-redux';
-import Logout from '../Body/User/Logout';
+import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
+import {
+	Badge,
+	ClickAwayListener,
+	Grow,
+	IconButton,
+	MenuList,
+	Popper,
+} from "@mui/material";
+import { PaperStyled } from "../styles/MuiStyles";
+import { useSelector } from "react-redux";
+import Logout from "../Body/User/Logout";
 
 const CartDropDown = () => {
 
 	const username = useSelector((state) => state?.user?.username);
+
+	const listBasketItems = useSelector(
+		(state) => state?.basket?.listBasketItems
+	);
+
+	const totalSum = listBasketItems.reduce((prev, curr) => prev + curr.total, 0).toFixed(2)
+	console.log(totalSum);
 
 	const [open, setOpen] = useState(false);
 
@@ -45,22 +59,22 @@ const CartDropDown = () => {
 		prevOpen.current = open;
 	}, [open]);
 
-  return (
-    <div>
-      <IconButton
+	return (
+		<div>
+			<IconButton
 				color="warning"
 				ref={anchorRef}
 				id="composition-button"
 				aria-controls={open ? "composition-menu" : undefined}
 				aria-expanded={open ? "true" : undefined}
 				aria-haspopup="true"
-				//onClick={handleToggle}
+				onClick={handleToggle}
 			>
-				<ShoppingBasketTwoToneIcon 
-					sx={{ color: "yellow", 
-						fontSize: "36px",
-						}}
-				/>
+				<Badge badgeContent={listBasketItems.length}>
+					<ShoppingBasketRoundedIcon
+						sx={{ color: "yellow", fontSize: "36px" }}
+					/>
+				</Badge>
 			</IconButton>
 
 			<Popper
@@ -94,23 +108,19 @@ const CartDropDown = () => {
 									aria-labelledby="composition-button"
 									onKeyDown={handleListKeyDown}
 								>
-
-									<div>Hi, {username} !</div>
+									<div>Total {totalSum} €</div>
 
 									<hr className="mx-2 my-1 w-100" />
 
 									{/* <Logout /> */}
-
 								</MenuList>
 							</ClickAwayListener>
 						</PaperStyled>
 					</Grow>
 				)}
 			</Popper>
-							
-      
-    </div>
-  )
-}
+		</div>
+	);
+};
 
-export default CartDropDown
+export default CartDropDown;
