@@ -8,7 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import AppMyShop from "./AppMyShop";
 import ItemReducer from "./Body/ItemRedux";
 import UserReducer from "./Body/UserRedux";
-import BasketReducer from "./Body/BasketReducer";
+import CartReducer from "./Body/CartReducer";
 
 const logger = createLogger();
 
@@ -16,7 +16,7 @@ const store = configureStore({
 	reducer: {
 		item: ItemReducer,
 		user: UserReducer,
-		basket: BasketReducer,
+		cart: CartReducer,
 	},
 
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

@@ -1,10 +1,47 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
-    listBasketItems: [],
-	isLoadingListBasketItems: false,
+    listCartItems: [],
+	isLoadingListCartItems: false,
 	error: "",
 }
+
+// save basket items in reducer only
+const CartRedux = createSlice({
+	name: "Cart",
+	initialState,
+    reducers: {
+        AddNewCartItem: (state, action) => {
+			let existItem = state.listCartItems.find(el => el.itemName === action.payload.itemName)
+			if (existItem) {
+				existItem.quantity += 1 
+				existItem.total = +(existItem.price * existItem.quantity).toFixed(2)
+				// console.log(current(existItem))
+			}
+			else {
+				state.listCartItems.push(action.payload);
+			}
+        },
+		AddQuantityItem: (state, action) => {
+			let existItem = state.listCartItems[action.payload]
+			existItem.quantity += 1 	
+			existItem.total = +(existItem.price * existItem.quantity).toFixed(2)
+		},
+		RemoveQuantityItem: (state, action) => {
+			let existItem = state.listCartItems[action.payload]
+			if (existItem.quantity > 1) {
+			existItem.quantity -= 1 	
+			existItem.total = +(existItem.price * existItem.quantity).toFixed(2)
+			} 
+			else {
+				state.listCartItems.splice(action.payload, 1)
+			}
+		},
+	}
+});
+
+export default CartRedux.reducer;
+export const { AddNewCartItem, AddQuantityItem, RemoveQuantityItem } = CartRedux.actions
 
 // export const AddNewBasketItem = createAsyncThunk(
 // 	"basket/AddNewBasketItem",
@@ -55,20 +92,13 @@ const initialState = {
 // 	}
 // );
 
-const BasketRedux = createSlice({
-	name: "Basket",
-	initialState,
-    reducers: {
-        AddNewBasketItem: (state, action) => {
-            state.listBasketItems.push(action.payload);
-            // state.isLoadingListBasketItems = false
-        },
+
 		// ResetUser: (state, action) => {
         //     state.userId = undefined;
 		// 	state.username = undefined;
 		// 	state.email = undefined;
 		// }
-    },
+
 	// extraReducers: (builder) => {
 	// 	builder.addCase(GetListItems.pending, (state) => {
 	// 		state.isLoadingListItems = true;
@@ -102,7 +132,7 @@ const BasketRedux = createSlice({
 	// 		state.error = action.payload;
 	// 	});
 	// },
-});
 
-export default BasketRedux.reducer;
-export const { AddNewBasketItem } = BasketRedux.actions
+
+// export default CartRedux.reducer;
+// export const { AddNewCartItem, AddQuantityItem, RemoveQuantityItem } = CartRedux.actions

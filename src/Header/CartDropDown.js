@@ -9,22 +9,19 @@ import {
 	MenuList,
 	Popper,
 } from "@mui/material";
-import { PaperStyled } from "../styles/MuiStyles";
+import { PaperStyled, TitleCartStyled, TotalStyled, TotalSumStyled } from "../styles/MuiStyles";
 import { useSelector } from "react-redux";
-import Logout from "../Body/User/Logout";
+import ListCartBox from "../Body/Cart/ListCartBox";
+
 
 const CartDropDown = () => {
-
 	const username = useSelector((state) => state?.user?.username);
 
-	const listBasketItems = useSelector(
-		(state) => state?.basket?.listBasketItems
-	);
-
-	const totalSum = listBasketItems.reduce((prev, curr) => prev + curr.total, 0).toFixed(2)
-	console.log(totalSum);
-
+	const listCartItems = useSelector((state) => state?.cart?.listCartItems);
+	
 	const [open, setOpen] = useState(false);
+
+	const totalSum = listCartItems.reduce((prev, curr) => prev + curr.total, 0).toFixed(2);
 
 	const anchorRef = useRef(null);
 
@@ -70,7 +67,7 @@ const CartDropDown = () => {
 				aria-haspopup="true"
 				onClick={handleToggle}
 			>
-				<Badge badgeContent={listBasketItems.length}>
+				<Badge badgeContent={listCartItems.length}>
 					<ShoppingBasketRoundedIcon
 						sx={{ color: "yellow", fontSize: "36px" }}
 					/>
@@ -108,11 +105,24 @@ const CartDropDown = () => {
 									aria-labelledby="composition-button"
 									onKeyDown={handleListKeyDown}
 								>
-									<div>Total {totalSum} €</div>
+									<TotalStyled>
+										Total:
+										<TotalSumStyled className="mx-2">
+											{totalSum}
+										</TotalSumStyled>
+										€
+									</TotalStyled>
 
 									<hr className="mx-2 my-1 w-100" />
 
-									{/* <Logout /> */}
+									<div>
+										<TitleCartStyled className="text-center mb-2">
+											Your cart:
+										</TitleCartStyled>
+
+										<ListCartBox />
+										
+									</div>
 								</MenuList>
 							</ClickAwayListener>
 						</PaperStyled>

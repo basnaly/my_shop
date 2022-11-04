@@ -3,15 +3,15 @@ import { BasketButton } from "../../styles/MuiStyles";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 import { Badge } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { AddNewBasketItem } from "../BasketReducer";
+import { AddNewCartItem } from "../CartReducer";
 
-const Basket = ({item}) => {
+const Cart = ({item}) => {
 
 	const dispatch = useDispatch()
 
-	const addBasketItem = () => {
+	const addCartItem = () => {
 
-		const basketData = {
+		const cartData = {
 			itemName: item.itemName,
 			image: item.image,
 			price: item.price,
@@ -21,8 +21,8 @@ const Basket = ({item}) => {
 			total: item.price
 		};
 
-		dispatch(AddNewBasketItem(basketData))
-		console.log(basketData.total)
+		dispatch(AddNewCartItem(cartData))
+		console.log(cartData.total)
 
 	}
 
@@ -31,7 +31,7 @@ const Basket = ({item}) => {
 			<BasketButton
 				variant={"outlined"}
 				className=" mb-3"
-				onClick={addBasketItem}
+				onClick={addCartItem}
 			>
 				<ShoppingBasketRoundedIcon />
 				
@@ -40,4 +40,4 @@ const Basket = ({item}) => {
 	);
 };
 
-export default Basket;
+export default Cart;

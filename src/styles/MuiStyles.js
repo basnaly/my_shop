@@ -90,10 +90,34 @@ export const ErrorStyled = styled("div")({
 });
 
 export const UserMenuStyled = styled("div")({
-	fontSize: "22px",
-	color: "forestgreen",
+	fontSize: "24px",
+	color: "hotpink",
+	fontWeight: "bold",
 	cursor: "pointer",
 	"&:hover": {
 		backgroundColor: "#fff6",
 	},
+});
+
+export const TotalStyled = styled("div")({
+	fontSize: "26px",
+
+});
+
+export const TotalSumStyled = styled("span")({
+	fontSize: "30px",
+	color: "hotpink",
+	fontWeight: "bold",
+	
+});
+
+export const ItemCartStyled = styled("div")({
+	fontSize: "24px",
+
+});
+
+export const TitleCartStyled = styled("div")({
+	fontSize: "26px",
+	textDecoration: 'underline',
+
 });

@@ -7,7 +7,8 @@ import {
 	ItemNameStyled,
 	PinkButton,
 } from "../../styles/MuiStyles";
-import Basket from "../Basket/Basket";
+
+import Cart from "../Cart/Cart";
 
 import DeleteItemDialog from "./DeleteItemDialog";
 import EditItemForm from "./EditItemForm";
@@ -46,7 +47,7 @@ const ListItemBox = ({ item }) => {
 					<DeleteItemDialog item={item} />
 				</div>
 			) : (
-				<Basket item={item} />
+				<Cart item={item} />
 			)}
 		</BoxStyled>
 	);
