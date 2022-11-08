@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 import { useSelector } from "react-redux";
 import { ClickAwayListener, Grow, IconButton, MenuList, Popper, Typography } from "@mui/material";
-import { PaperStyled } from "../styles/MuiStyles";
+import { PaperStyled, UserMenuStyled } from "../styles/MuiStyles";
 import Logout from "../Body/User/Logout";
+import { useNavigate } from "react-router";
 
 const UserDropdown = () => {
 
@@ -44,6 +45,13 @@ const UserDropdown = () => {
 
 		prevOpen.current = open;
 	}, [open]);
+
+	const navigate = useNavigate()
+
+	const navigateOrders = () => {
+		navigate("/orders");
+		setOpen(false)
+	};
 
 	return (
 		<div className="d-flex flex-column align-items-center">
@@ -97,6 +105,12 @@ const UserDropdown = () => {
 									<div>Hi {username} !</div>
 
 									<hr className="mx-2 my-1 w-100" />
+
+									<UserMenuStyled className="mt-2"
+										onClick={navigateOrders}
+									>
+										My orders
+									</UserMenuStyled>
 
 									<Logout />
 								</MenuList>

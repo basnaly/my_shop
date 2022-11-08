@@ -47,6 +47,24 @@ export const BasketButton = styled(Button)({
 	padding: "3px 10px",
 });
 
+export const LightYellowButton = styled(Button)({
+	textTransform: "none",
+	color: "yellow",
+	border: "1px solid dimgray",
+	fontSize: "18px",
+	backgroundColor: "lightgray",
+	padding: "1px 5px",
+});
+
+export const LightPinkButton = styled(Button)({
+	textTransform: "none",
+	color: "hotpink",
+	border: "1px solid dimgray",
+	fontSize: "18px",
+	backgroundColor: "lightgray",
+	padding: "1px 5px",
+});
+
 export const PaperStyled = styled(Paper)({
 	padding: "10px",
 	margin: "10px",
@@ -120,4 +138,19 @@ export const TitleCartStyled = styled("div")({
 	fontSize: "26px",
 	textDecoration: 'underline',
 
+});
+
+export const OrderTitleStyled = styled("div")({
+	fontSize: "26px",
+	textDecoration: 'underline',	
+});
+
+export const OrderDataStyled = styled("div")({
+	fontSize: "22px",
+});
+
+export const SpanOrderStyled = styled("span")({
+	color: 'hotpink',
+	fontWeight: "bold",
+	marginLeft: '10px',
 });

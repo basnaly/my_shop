@@ -9,19 +9,34 @@ import {
 	MenuList,
 	Popper,
 } from "@mui/material";
-import { PaperStyled, TitleCartStyled, TotalStyled, TotalSumStyled } from "../styles/MuiStyles";
-import { useSelector } from "react-redux";
+import {
+	PaperStyled,
+	TitleCartStyled,
+	TotalStyled,
+	TotalSumStyled,
+	YellowButton,
+} from "../styles/MuiStyles";
+import { useDispatch, useSelector } from "react-redux";
 import ListCartBox from "../Body/Cart/ListCartBox";
-
+import { useNavigate } from "react-router";
+import { CreateOrder } from "../Body/OrderRedux";
+import { ClearCart, GetCartList } from "../Body/CartRedux";
 
 const CartDropDown = () => {
-	const username = useSelector((state) => state?.user?.username);
 
+	const username = useSelector((state) => state?.user?.username);
 	const listCartItems = useSelector((state) => state?.cart?.listCartItems);
-	
+	const listOrders = useSelector(state => state?.order?.listOrders)
+
 	const [open, setOpen] = useState(false);
 
-	const totalSum = listCartItems.reduce((prev, curr) => prev + curr.total, 0).toFixed(2);
+	const navigate = useNavigate()
+
+	const dispatch = useDispatch()
+
+	const totalSum = listCartItems
+		.reduce((prev, curr) => prev + curr.total, 0)
+		.toFixed(2);
 
 	const anchorRef = useRef(null);
 
@@ -46,6 +61,13 @@ const CartDropDown = () => {
 		}
 	}
 
+	const createOrder = () => {
+		navigate("/orders");
+		setOpen(false)
+		dispatch(CreateOrder(totalSum))
+		dispatch(ClearCart())
+	};
+
 	// return focus to the button when we transitioned from !open -> open
 	const prevOpen = useRef(open);
 	useEffect(() => {
@@ -55,6 +77,12 @@ const CartDropDown = () => {
 
 		prevOpen.current = open;
 	}, [open]);
+
+
+	useEffect(() => {
+		dispatch(GetCartList())
+		
+	}, [])
 
 	return (
 		<div>
@@ -121,8 +149,16 @@ const CartDropDown = () => {
 										</TitleCartStyled>
 
 										<ListCartBox />
-										
 									</div>
+
+									<YellowButton
+										variant={"outlined"}
+										className="mt-3 mb-2"
+										onClick={createOrder}
+									>
+										Order
+									</YellowButton>
+
 								</MenuList>
 							</ClickAwayListener>
 						</PaperStyled>

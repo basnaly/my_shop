@@ -8,7 +8,8 @@ import reportWebVitals from "./reportWebVitals";
 import AppMyShop from "./AppMyShop";
 import ItemReducer from "./Body/ItemRedux";
 import UserReducer from "./Body/UserRedux";
-import CartReducer from "./Body/CartReducer";
+import CartReducer from "./Body/CartRedux";
+import OrderReducer from "./Body/OrderRedux";
 
 const logger = createLogger();
 
@@ -17,6 +18,7 @@ const store = configureStore({
 		item: ItemReducer,
 		user: UserReducer,
 		cart: CartReducer,
+		order: OrderReducer,
 	},
 
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

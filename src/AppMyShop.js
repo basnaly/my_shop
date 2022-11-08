@@ -9,26 +9,32 @@ import Typography from "@mui/material/Typography";
 import ListItems from "./Body/Items/ListItems";
 import { useDispatch } from "react-redux";
 import { CheckUserWithBackend } from "./Body/UserRedux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import OrderScreen from "./Body/Orders/OrderScreen";
 
 const AppMyShop = () => {
-
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-
-        dispatch(CheckUserWithBackend())
-
-    }, []);
+		dispatch(CheckUserWithBackend());
+	}, []);
 
 	return (
-		<MainStyled className="d-flex flex-column vh-100">
-			<ThemeProvider theme={myTheme}>
-				<Typography>
-					<Header />
-					<ListItems />
-				</Typography>
-			</ThemeProvider>
-		</MainStyled>
+		<BrowserRouter>
+			<MainStyled className="d-flex flex-column vh-100">
+				<ThemeProvider theme={myTheme}>
+					<Typography>
+						<Header />
+
+						<Routes>
+							<Route path="/orders" element={<OrderScreen />} />
+							<Route path="/" element={<ListItems />} />
+						</Routes>
+					
+					</Typography>
+				</ThemeProvider>
+			</MainStyled>
+		</BrowserRouter>
 	);
 };
 

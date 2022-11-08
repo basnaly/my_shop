@@ -3,7 +3,7 @@ import { ItemCartStyled } from "../../styles/MuiStyles";
 import { useDispatch, useSelector } from "react-redux";
 import AddShoppingCartRoundedIcon from "@mui/icons-material/AddShoppingCartRounded";
 import RemoveShoppingCartRoundedIcon from "@mui/icons-material/RemoveShoppingCartRounded";
-import { AddQuantityItem, RemoveQuantityItem } from "../CartReducer";
+import { AddQuantityItem, RemoveQuantityItem } from "../CartRedux";
 
 const ListCartBox = () => {
 

@@ -39,7 +39,7 @@ export const AddNewItem = createAsyncThunk(
 );
 
 export const GetListItems = createAsyncThunk(
-	"note/GetListItems",
+	"item/GetListItems",
 	async (_, thunkAPI) => {
 
 		try {

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { BasketButton } from "../../styles/MuiStyles";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
-import { Badge } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { AddNewCartItem } from "../CartReducer";
+import { AddCartItem } from "../CartRedux";
 
 const Cart = ({item}) => {
 
@@ -21,9 +20,7 @@ const Cart = ({item}) => {
 			total: item.price
 		};
 
-		dispatch(AddNewCartItem(cartData))
-		console.log(cartData.total)
-
+		dispatch(AddCartItem(cartData))
 	}
 
 	return (
