@@ -14,15 +14,15 @@ import Slide from "@mui/material/Slide";
 import { AddNewButton, PinkButton, YellowButton } from "../../styles/MuiStyles";
 import { SaveEditedItem } from "../ItemRedux";
 import { useDispatch } from "react-redux";
-import { UNITS } from "../../constants";
+import { CATEGORY, UNITS } from "../../constants";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const EditItemForm = ({item}) => {
-
-    const [itemName, setItemName] = useState(item.itemName);
+const EditItemForm = ({ item }) => {
+	const [category, setCategory] = useState(item.category);
+	const [itemName, setItemName] = useState(item.itemName);
 	const [image, setImage] = useState(item.image);
 	const [price, setPrice] = useState(item.price);
 	const [unit, setUnit] = useState(item.unit);
@@ -35,14 +35,24 @@ const EditItemForm = ({item}) => {
 
 	const dispatch = useDispatch();
 
-    const saveCorrectedItem = () => {
-        dispatch(SaveEditedItem({ itemId: item.id, itemName, image, price, unit, note }))
-        setIsDialogOpen(false)
-    }
+	const saveCorrectedItem = () => {
+		dispatch(
+			SaveEditedItem({
+				itemId: item.id,
+				category,
+				itemName,
+				image,
+				price,
+				unit,
+				note,
+			})
+		);
+		setIsDialogOpen(false);
+	};
 
-    const closeForm = () => {
-        setIsDialogOpen(false)
-    }
+	const closeForm = () => {
+		setIsDialogOpen(false);
+	};
 
 	return (
 		<React.Fragment>
@@ -83,6 +93,22 @@ const EditItemForm = ({item}) => {
 
 					<div className="d-flex flex-column align-items-center m-1">
 						<TextField
+							margin="dense"
+							id="outlined-select-currency"
+							select
+							label="Select categoty"
+							sx={{ width: "180px" }}
+							value={category}
+							onChange={(e) => setCategory(e.target.value)}
+						>
+							{CATEGORY.map((el) => (
+								<MenuItem key={el} value={el}>
+									{el}
+								</MenuItem>
+							))}
+						</TextField>
+
+						<TextField
 							autoFocus
 							margin="dense"
 							id="itemName"
@@ -122,19 +148,16 @@ const EditItemForm = ({item}) => {
 							<div className="mx-2">per</div>
 
 							<TextField
-                                margin="dense"
+								margin="dense"
 								id="outlined-select-currency"
 								select
 								label="Select unit"
-                                sx={{ width: "110px" }}
+								sx={{ width: "110px" }}
 								value={unit}
-								onChange={e => setUnit(e.target.value)}
+								onChange={(e) => setUnit(e.target.value)}
 							>
 								{UNITS.map((el) => (
-									<MenuItem
-										key={el}
-										value={el}
-									>
+									<MenuItem key={el} value={el}>
 										{el}
 									</MenuItem>
 								))}

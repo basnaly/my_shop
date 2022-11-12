@@ -1,6 +1,7 @@
 import moment from "moment";
 import React from "react";
-import { LightYellowButton, OrderDataStyled, SpanOrderStyled } from "../../styles/MuiStyles";
+import { OrderDataStyled, SpanOrderStyled } from "../../styles/MuiStyles";
+import DialogDetailsOrder from "./DialogDetailsOrder";
 
 const ListOrders = ({ order }) => {
 
@@ -17,17 +18,14 @@ const ListOrders = ({ order }) => {
             </div>
 
 			<div className="mx-2">Total sum: 
-                <SpanOrderStyled>{order.totalSum}</SpanOrderStyled>
+                <SpanOrderStyled className="me-2">
+					{order.totalSum}
+				</SpanOrderStyled>
                 €
             </div>
 
-			<LightYellowButton
-				variant={"outlined"}
-				className="mx-2"
-				// onClick={backHome}
-			>
-				Details
-			</LightYellowButton>
+			<DialogDetailsOrder items={order.items}/>
+
 		</OrderDataStyled>
 	);
 };

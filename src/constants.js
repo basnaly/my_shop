@@ -1,3 +1,5 @@
+export const CATEGORY = ['Vegetables', 'Fruits', 'Dairy']
+
 export const UNITS = ['kg', 'gr', 'piece'];
 
 export const validatePassword = (password) => {

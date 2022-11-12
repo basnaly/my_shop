@@ -8,13 +8,12 @@ const OrderScreen = () => {
 
 	const userId = useSelector((state) => state.user.userId);
     const listOrders = useSelector(state => state?.order?.listOrders)
-    console.log(listOrders)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
 		dispatch(GetListOrders())
-	}, [])
+	}, [userId])
 
 
 	return (

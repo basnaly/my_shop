@@ -14,18 +14,19 @@ import Slide from "@mui/material/Slide";
 import { PinkButton, YellowButton } from "../styles/MuiStyles";
 import { AddNewItem, GetListItems } from "../Body/ItemRedux";
 import { useDispatch } from "react-redux";
-import { UNITS } from "../constants";
+import { CATEGORY, UNITS } from "../constants";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="down" ref={ref} {...props} />;
 });
 
 const AddItemDialog = () => {
-	
+
+	const [category, setCategory] = useState(CATEGORY[0]);
 	const [itemName, setItemName] = useState("");
 	const [image, setImage] = useState("");
 	const [price, setPrice] = useState("");
-	const [unit, setUnit] = useState("kg");
+	const [unit, setUnit] = useState(UNITS[0]);
 	const [note, setNote] = useState("");
 
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -36,24 +37,26 @@ const AddItemDialog = () => {
 	const dispatch = useDispatch();
 
 	const saveItem = () => {
-		dispatch(AddNewItem( {itemName, image, price, unit, note} ));
-		closeDialog()
-		setItemName('')
-		setImage('')
-		setPrice('')
-		setUnit('kg')
-		setNote('')
-		dispatch(GetListItems())
+		dispatch(AddNewItem({ category, itemName, image, price, unit, note }));
+		closeDialog();
+		setCategory(CATEGORY[0]);
+		setItemName("");
+		setImage("");
+		setPrice("");
+		setUnit(UNITS[0]);
+		setNote("");
+		dispatch(GetListItems());
 	};
 
 	const closeForm = () => {
-		setItemName('')
-		setImage('')
-		setPrice('')
-		setUnit('kg')
-		setNote('')
-		closeDialog()
-	}
+		setCategory(CATEGORY[0]);
+		setItemName("");
+		setImage("");
+		setPrice("");
+		setUnit(UNITS[0]);
+		setNote("");
+		closeDialog();
+	};
 
 	return (
 		<React.Fragment>
@@ -75,8 +78,8 @@ const AddItemDialog = () => {
 			>
 				<DialogTitle
 					// id="modal-modal-title"
-					variant="h6"
-					component="h2"
+					// variant="h6"
+					// component="h2"
 					className="pb-1 m-1"
 				>
 					Add new item form
@@ -93,6 +96,22 @@ const AddItemDialog = () => {
 					</DialogContentText>
 
 					<div className="d-flex flex-column align-items-center m-1">
+						<TextField
+							margin="dense"
+							id="outlined-select-currency"
+							select
+							label="Select categoty"
+							sx={{ width: "180px" }}
+							value={category}
+							onChange={(e) => setCategory(e.target.value)}
+						>
+							{CATEGORY.map((el) => (
+								<MenuItem key={el} value={el}>
+									{el}
+								</MenuItem>
+							))}
+						</TextField>
+
 						<TextField
 							autoFocus
 							margin="dense"
@@ -117,11 +136,8 @@ const AddItemDialog = () => {
 							onChange={(e) => setImage(e.target.value)}
 						/>
 
-						{/* <IconItemStyled>🥔</IconItemStyled> */}
-
 						<div className="d-flex align-items-center">
 							<TextField
-								// autoFocus
 								margin="dense"
 								id="price"
 								label="Item's price"
@@ -135,19 +151,16 @@ const AddItemDialog = () => {
 							<div className="mx-2">per</div>
 
 							<TextField
-                                margin="dense"
+								margin="dense"
 								id="outlined-select-currency"
 								select
 								label="Select unit"
-                                sx={{ width: "110px" }}
+								sx={{ width: "110px" }}
 								value={unit}
-								onChange={e => setUnit(e.target.value)}
+								onChange={(e) => setUnit(e.target.value)}
 							>
 								{UNITS.map((el) => (
-									<MenuItem
-										key={el}
-										value={el}
-									>
+									<MenuItem key={el} value={el}>
 										{el}
 									</MenuItem>
 								))}

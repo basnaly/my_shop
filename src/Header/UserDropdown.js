@@ -66,7 +66,7 @@ const UserDropdown = () => {
 				onClick={handleToggle}
 			>
 				<PersonPinIcon 
-					sx={{ color: "hotpink", fontSize: "36px" }}
+					sx={{ color: "#FF1493", fontSize: "36px" }}
 				/>
 			</IconButton>
 

@@ -10,6 +10,7 @@ import Slide from '@mui/material/Slide';
 
 import { GreenButton, PinkButton, RedButton, UserMenuStyled, YellowButton } from "../../styles/MuiStyles";
 import { ResetUser } from "../UserRedux";
+import { useNavigate } from "react-router";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
@@ -24,13 +25,13 @@ const Logout = () => {
 
     const dispatch = useDispatch();
 
+    const navigate = useNavigate()
+
     const handleLogout = () => { 
 
         sessionStorage.removeItem('authToken')
         dispatch(ResetUser()) // no userId, no email, no password
-        dispatch({
-            type: "RESET_USER_DATA"
-        })
+        navigate('/')
     }
 
   return (

@@ -1,8 +1,10 @@
-import { styled} from "@mui/material";
+import { styled, TableRow} from "@mui/material";
 import { Button, Box, DialogTitle, Paper} from "@mui/material";
 
 export const MainStyled = styled('div')({
-    // backgroundColor: "lightgray",
+    fontFamily: "'Spinnaker', sans-serif",
+	fontSize: "30px",
+		// backgroundColor: "gray",
 });
 
 export const HeaderStyled = styled("div")({
@@ -22,7 +24,7 @@ export const YellowButton = styled(Button)({
 
 export const PinkButton = styled(Button)({
 	textTransform: "none",
-	color: "deeppink",
+	color: "#FF1493",
 	border: "1px solid dimgray",
 	fontSize: "18px",
 	backgroundColor: "darkgray",
@@ -31,7 +33,7 @@ export const PinkButton = styled(Button)({
 
 export const AuthButton = styled(Button)({
 	textTransform: "none",
-	color: "deeppink",
+	color: "#FF1493",
 	border: "1px solid dimgray",
 	fontSize: "18px",
 	backgroundColor: "darkgray",
@@ -58,7 +60,7 @@ export const LightYellowButton = styled(Button)({
 
 export const LightPinkButton = styled(Button)({
 	textTransform: "none",
-	color: "hotpink",
+	color: "#FF1493",
 	border: "1px solid dimgray",
 	fontSize: "18px",
 	backgroundColor: "lightgray",
@@ -69,7 +71,7 @@ export const PaperStyled = styled(Paper)({
 	padding: "10px",
 	margin: "10px",
 	position: "relative",
-	border: "1px solid hotpink",
+	border: "1px solid #FF1493",
 	borderRadius: "10px",
 	fontSize: "30px",
 	backgroundColor: "linen",
@@ -77,7 +79,6 @@ export const PaperStyled = styled(Paper)({
 
 export const DialogTitleStyled = styled(DialogTitle)({
 	fontSize: "24px",
-	// paddingBottom: 0
 });
 
 export const IconItemStyled = styled("div")({
@@ -109,7 +110,7 @@ export const ErrorStyled = styled("div")({
 
 export const UserMenuStyled = styled("div")({
 	fontSize: "24px",
-	color: "hotpink",
+	color: "#FF1493",
 	fontWeight: "bold",
 	cursor: "pointer",
 	"&:hover": {
@@ -124,7 +125,7 @@ export const TotalStyled = styled("div")({
 
 export const TotalSumStyled = styled("span")({
 	fontSize: "30px",
-	color: "hotpink",
+	color: "#FF1493",
 	fontWeight: "bold",
 	
 });
@@ -150,7 +151,7 @@ export const OrderDataStyled = styled("div")({
 });
 
 export const SpanOrderStyled = styled("span")({
-	color: 'hotpink',
+	color: '#FF1493',
 	fontWeight: "bold",
 	marginLeft: '10px',
 });

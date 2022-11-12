@@ -11,9 +11,10 @@ const initialState = {
 
 export const AddNewItem = createAsyncThunk(
 	"item/AddNewItem",
-	async ({ itemName, image, price, unit, note }, thunkAPI) => {
+	async ({ category, itemName, image, price, unit, note }, thunkAPI) => {
 
 		const itemData = {
+			category,
 			itemName, 
 			image,
 			price, 
@@ -76,9 +77,10 @@ export const DeleteItem = createAsyncThunk(
 
 export const SaveEditedItem = createAsyncThunk(
 	"item/SaveEditedItem",
-	async ({ itemId, itemName, image, price, unit, note }, thunkAPI) => {
+	async ({ itemId, category, itemName, image, price, unit, note }, thunkAPI) => {
 
 		const editedItemData = {
+			category,
 			itemName, 
 			image,
 			price, 
