@@ -26,7 +26,7 @@ const ListCartBox = () => {
                     key={item.itemName}
                 >
 					<ItemCartStyled>
-						{item.itemName} {item.price} € x {item.quantity} = {" "}
+						{item.itemName} {item.price} € x {item.quantity} {item.unit} = {" "}
 						{item.total} €
 					</ItemCartStyled>
 

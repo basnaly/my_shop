@@ -94,6 +94,13 @@ const UserRedux = createSlice({
             state.userId = undefined;
 			state.username = undefined;
 			state.email = undefined;
+		},
+		CheckError: (state, action) => {
+			if (action?.payload === 401 || action?.payload === 403) {
+				state.userId = undefined;
+				state.username = undefined;
+				state.email = undefined;
+			}
 		}
     },
 	extraReducers: (builder) => {
@@ -154,4 +161,4 @@ const UserRedux = createSlice({
 });
 
 export default UserRedux.reducer;
-export const { SetAuthError, ResetUser } = UserRedux.actions
+export const { SetAuthError, ResetUser, CheckError } = UserRedux.actions

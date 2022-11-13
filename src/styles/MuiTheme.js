@@ -108,6 +108,13 @@ export const myTheme = createTheme({
                     backgroundColor: 'yellow',
                 }
             }
+        },
+        MuiFormControlLabel: {
+            styleOverrides: {
+                label: {
+                    fontSize: "16px",
+                }
+            }
         }
 	},
 });

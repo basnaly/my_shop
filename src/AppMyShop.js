@@ -12,12 +12,14 @@ import { CheckUserWithBackend } from "./Body/UserRedux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import OrderScreen from "./Body/Orders/OrderScreen";
 import MainScreen from "./Body/Items/MainScreen";
+import { GetListItems } from "./Body/ItemRedux";
 
 const AppMyShop = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(CheckUserWithBackend());
+		dispatch(GetListItems())
 	}, []);
 
 	return (

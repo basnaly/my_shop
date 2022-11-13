@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import config from "../config";
+import { CheckError } from "./UserRedux";
 
 const initialState = {
 	listCartItems: [],
@@ -46,7 +47,7 @@ export const AddCartItem = createAsyncThunk(
 
 			thunkAPI.dispatch(GetCartList());
 		} catch (error) {
-			console.log(error);
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -63,6 +64,7 @@ export const GetCartList = createAsyncThunk(
 
 			return listCartItems;
 		} catch (error) {
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -89,6 +91,7 @@ export const AddQuantityItem = createAsyncThunk(
 
 			thunkAPI.dispatch(GetCartList());
 		} catch (error) {
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -121,6 +124,7 @@ export const RemoveQuantityItem = createAsyncThunk(
 
 			thunkAPI.dispatch(GetCartList());
 		} catch (error) {
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -139,6 +143,7 @@ export const ClearCart = createAsyncThunk(
 
 			thunkAPI.dispatch(GetCartList());
 		} catch (error) {
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}

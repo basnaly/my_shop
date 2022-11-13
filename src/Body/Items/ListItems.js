@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetListItems } from '../ItemRedux'
 import ListItemBox from './ListItemBox'
 
-const ListItems = () => {
+const ListItems = ({selectedTab}) => {
 
     const listItems = useSelector(state => state?.item?.listItems)
+
+    const filteredListItems = listItems.filter(el => el.category === selectedTab)
 
     const dispatch = useDispatch()
 
@@ -19,7 +21,7 @@ const ListItems = () => {
             <div>You don't have any list items yet!</div>
             :
             <div className="d-flex flex-wrap align-items-center justify-content-evenly">
-                {listItems.map(el => (
+                {filteredListItems.map(el => (
                     <ListItemBox key={el.id} item={el} />
                 ))}
             </div>

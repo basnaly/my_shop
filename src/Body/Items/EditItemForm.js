@@ -9,9 +9,11 @@ import {
 	MenuItem,
 	TextField,
 } from "@mui/material";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import Slide from "@mui/material/Slide";
 
-import { AddNewButton, PinkButton, YellowButton } from "../../styles/MuiStyles";
+import { PinkButton, YellowButton } from "../../styles/MuiStyles";
 import { SaveEditedItem } from "../ItemRedux";
 import { useDispatch } from "react-redux";
 import { CATEGORY, UNITS } from "../../constants";
@@ -21,7 +23,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const EditItemForm = ({ item }) => {
+
 	const [category, setCategory] = useState(item.category);
+	const [outOfStock, setOutOfStock] = useState(item.outOfStock);
 	const [itemName, setItemName] = useState(item.itemName);
 	const [image, setImage] = useState(item.image);
 	const [price, setPrice] = useState(item.price);
@@ -40,6 +44,7 @@ const EditItemForm = ({ item }) => {
 			SaveEditedItem({
 				itemId: item.id,
 				category,
+				outOfStock,
 				itemName,
 				image,
 				price,
@@ -92,21 +97,38 @@ const EditItemForm = ({ item }) => {
 					</DialogContentText>
 
 					<div className="d-flex flex-column align-items-center m-1">
-						<TextField
-							margin="dense"
-							id="outlined-select-currency"
-							select
-							label="Select categoty"
-							sx={{ width: "180px" }}
-							value={category}
-							onChange={(e) => setCategory(e.target.value)}
-						>
-							{CATEGORY.map((el) => (
-								<MenuItem key={el} value={el}>
-									{el}
-								</MenuItem>
-							))}
-						</TextField>
+						<div className="d-flex align-items-center">
+							<TextField
+								margin="dense"
+								id="outlined-select-currency"
+								select
+								label="Select categoty"
+								sx={{ width: "180px" }}
+								value={category}
+								onChange={(e) => setCategory(e.target.value)}
+							>
+								{CATEGORY.map((el) => (
+									<MenuItem key={el} value={el}>
+										{el}
+									</MenuItem>
+								))}
+							</TextField>
+
+							<FormControlLabel
+								checked={outOfStock}
+								onChange={(e) => setOutOfStock(e.target.checked)}
+								control={
+									<Checkbox
+										sx={{"& .MuiSvgIcon-root": {
+												fontSize: 28,
+											},
+										}}
+									/>
+								}
+								label="Out of stock"
+								labelPlacement="top"
+							/>
+						</div>
 
 						<TextField
 							autoFocus

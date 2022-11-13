@@ -11,6 +11,7 @@ const Cart = ({item}) => {
 	const addCartItem = () => {
 
 		const cartData = {
+			outOfStock: item.outOfStock,
 			itemName: item.itemName,
 			image: item.image,
 			price: item.price,
@@ -29,6 +30,7 @@ const Cart = ({item}) => {
 				variant={"outlined"}
 				className=" mb-3"
 				onClick={addCartItem}
+				disabled={item.outOfStock === true}
 			>
 				<ShoppingBasketRoundedIcon />
 				

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import config from "../config";
+import { CheckError } from "./UserRedux";
 
 const initialState = {
 	listItems: [],
@@ -11,10 +12,11 @@ const initialState = {
 
 export const AddNewItem = createAsyncThunk(
 	"item/AddNewItem",
-	async ({ category, itemName, image, price, unit, note }, thunkAPI) => {
+	async ({ category, outOfStock, itemName, image, price, unit, note }, thunkAPI) => {
 
 		const itemData = {
 			category,
+			outOfStock,
 			itemName, 
 			image,
 			price, 
@@ -33,7 +35,7 @@ export const AddNewItem = createAsyncThunk(
 
 			thunkAPI.dispatch(GetListItems());
 		} catch (error) {
-			console.log(error)
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -70,6 +72,7 @@ export const DeleteItem = createAsyncThunk(
 
 			thunkAPI.dispatch(GetListItems());
 		} catch (error) {
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -77,10 +80,11 @@ export const DeleteItem = createAsyncThunk(
 
 export const SaveEditedItem = createAsyncThunk(
 	"item/SaveEditedItem",
-	async ({ itemId, category, itemName, image, price, unit, note }, thunkAPI) => {
+	async ({ itemId, category, outOfStock, itemName, image, price, unit, note }, thunkAPI) => {
 
 		const editedItemData = {
 			category,
+			outOfStock,
 			itemName, 
 			image,
 			price, 
@@ -98,6 +102,7 @@ export const SaveEditedItem = createAsyncThunk(
 			thunkAPI.dispatch(GetListItems());
 
 		} catch (error) {
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}

@@ -94,7 +94,7 @@ const UserDropdown = () => {
 							elevation={8}
 						>
 							<ClickAwayListener onClickAway={handleClose}>
-                                <Typography>
+                                <Typography as='div'>
 								<MenuList
 									className="d-flex flex-column align-items-center"
 									autoFocusItem={open}

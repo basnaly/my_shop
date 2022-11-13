@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import config from "../config";
+import { CheckError } from "./UserRedux";
 
 const initialState = {
 	listOrders: [],
@@ -27,12 +28,11 @@ export const CreateOrder = createAsyncThunk(
 				config()
 				
 			);
-			console.log(result)
 
 			thunkAPI.dispatch(GetListOrders());
 
 		} catch (error) {
-			console.log(error)
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -52,6 +52,7 @@ export const GetListOrders = createAsyncThunk(
 			return listOrders;
 
 		} catch (error) {
+			thunkAPI.dispatch(CheckError(error?.response?.status))
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}

@@ -155,6 +155,7 @@ const CartDropDown = () => {
 										variant={"outlined"}
 										className="mt-3 mb-2"
 										onClick={createOrder}
+										disabled={listCartItems.length === 0}
 									>
 										Order
 									</YellowButton>

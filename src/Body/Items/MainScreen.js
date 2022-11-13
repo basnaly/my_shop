@@ -4,22 +4,13 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import { useLocation, useNavigate, useParams } from "react-router";
-import { TabBoxStyled } from "../../styles/MuiStyles";
+import ListItems from "./ListItems";
 
 const MainScreen = () => {
 
-    const navigate = useNavigate();
-
-	const location = useLocation();
-
-	const params = useParams();
-
-	const idPath = `/${params.id}/`;
-
 	const [selectedTab, setSelectedTab] = useState('Vegetables');
 
-	const handleChange = (_, tab) => {
+	const handleChange = (event, tab) => {
 		setSelectedTab(tab);
 		//navigate(tab);
 	};
@@ -37,6 +28,7 @@ const MainScreen = () => {
 						<Tab label="Dairy" value={"Dairy"}/>
 					</TabList>
 				</Box>
+                <ListItems selectedTab={selectedTab}/>
 
 			</TabContext>
 		</React.Fragment>

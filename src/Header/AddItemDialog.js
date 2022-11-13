@@ -9,6 +9,8 @@ import {
 	MenuItem,
 	TextField,
 } from "@mui/material";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import Slide from "@mui/material/Slide";
 
 import { PinkButton, YellowButton } from "../styles/MuiStyles";
@@ -23,6 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const AddItemDialog = () => {
 
 	const [category, setCategory] = useState(CATEGORY[0]);
+	const [outOfStock, setOutOfStock] = useState(false);
 	const [itemName, setItemName] = useState("");
 	const [image, setImage] = useState("");
 	const [price, setPrice] = useState("");
@@ -37,9 +40,10 @@ const AddItemDialog = () => {
 	const dispatch = useDispatch();
 
 	const saveItem = () => {
-		dispatch(AddNewItem({ category, itemName, image, price, unit, note }));
+		dispatch(AddNewItem({ category, outOfStock, itemName, image, price, unit, note }));
 		closeDialog();
 		setCategory(CATEGORY[0]);
+		setOutOfStock(false)
 		setItemName("");
 		setImage("");
 		setPrice("");
@@ -50,6 +54,7 @@ const AddItemDialog = () => {
 
 	const closeForm = () => {
 		setCategory(CATEGORY[0]);
+		setOutOfStock(false)
 		setItemName("");
 		setImage("");
 		setPrice("");
@@ -96,6 +101,9 @@ const AddItemDialog = () => {
 					</DialogContentText>
 
 					<div className="d-flex flex-column align-items-center m-1">
+
+					<div className="d-flex align-items-center">
+						
 						<TextField
 							margin="dense"
 							id="outlined-select-currency"
@@ -111,6 +119,18 @@ const AddItemDialog = () => {
 								</MenuItem>
 							))}
 						</TextField>
+
+						<FormControlLabel 
+							checked={outOfStock}
+							onChange={(e) => setOutOfStock(e.target.checked)}
+							control={
+							<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+							/>} 
+							label="Out of stock" 
+							labelPlacement="top" 
+						/>
+
+					</div>
 
 						<TextField
 							autoFocus
