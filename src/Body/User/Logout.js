@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -8,9 +8,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
-import { GreenButton, PinkButton, RedButton, UserMenuStyled, YellowButton } from "../../styles/MuiStyles";
+import { PinkButton, UserMenuStyled, YellowButton } from "../../styles/MuiStyles";
 import { ResetUser } from "../UserRedux";
 import { useNavigate } from "react-router";
+import { ClearCart } from "../CartRedux";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
@@ -19,6 +20,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Logout = () => {
 
     const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
+    const listCartItems = useSelector(state => state?.cart?.listCartItems)
+    // console.log(listCartItems)
     
     const openLogoutDialog = () => setIsLogoutDialogOpen(true);
     const closeLogoutDialog = () => setIsLogoutDialogOpen(false);
@@ -31,6 +34,7 @@ const Logout = () => {
 
         sessionStorage.removeItem('authToken')
         dispatch(ResetUser()) // no userId, no email, no password
+        //dispatch(ClearCart())
         navigate('/')
     }
 

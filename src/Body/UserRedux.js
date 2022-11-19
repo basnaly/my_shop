@@ -9,6 +9,16 @@ const initialState = {
     email: '',
     authError: '',
     isAuthLoading: false,
+	address: {
+		district: '',
+		city: '',
+		street: '',
+		buildNumber: '',
+		appartment: '',
+		phone: '',
+	},
+	isSavingAddress: false,
+	addressError: '',
 }
 
 export const RegisterWithBackend = createAsyncThunk(
@@ -53,8 +63,9 @@ export const LoginWithBackend = createAsyncThunk(
 			let userId = result?.data?.id;
 			let userUsername = result?.data?.username;
 			let userEmail = result?.data?.email;
+			let address = result?.data?.address;
 
-			return {userId, userUsername, userEmail};  
+			return {userId, userUsername, userEmail, address};  
 
 		} catch (error) {
             return thunkAPI.rejectWithValue(error.response.data.message);
@@ -73,9 +84,28 @@ export const CheckUserWithBackend = createAsyncThunk(
 			let userId = result?.data?.id;
 			let userUsername = result?.data?.username;
 			let userEmail = result?.data?.email;
+			let address = result?.data?.address;
 
-			return {userId, userUsername, userEmail};  
+			return {userId, userUsername, userEmail, address};  
 
+		} catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data.message);
+		}
+	}
+);
+
+export const SaveUserAddress = createAsyncThunk(
+	"user/SaveUserAddress",
+
+	async ({district, city, street, buildNumber, appartment, phone}, thunkAPI) => {
+
+		try {
+			const result = await axios.post("/user/save-address", {
+				district, city, street, buildNumber, appartment, phone
+			}, config());
+			
+			return {district, city, street, buildNumber, appartment, phone};  // action.payload for fullfiled
+			
 		} catch (error) {
             return thunkAPI.rejectWithValue(error.response.data.message);
 		}
@@ -130,6 +160,7 @@ const UserRedux = createSlice({
 			state.userId = action.payload.userId;
             state.username = action.payload.userUsername;
             state.email = action.payload.userEmail;
+			state.address = action.payload.address;
 			state.authError = "";
 		});
 		builder.addCase(LoginWithBackend.rejected, (state, action) => {
@@ -148,6 +179,7 @@ const UserRedux = createSlice({
 			state.userId = action.payload.userId;
             state.username = action.payload.userUsername;
             state.email = action.payload.userEmail;
+			state.address = action.payload.address;
 			state.authError = "";
 		});
 		builder.addCase(CheckUserWithBackend.rejected, (state, action) => {
@@ -156,6 +188,32 @@ const UserRedux = createSlice({
             state.username = "";
             state.email = "";
 			state.authError = action.payload;
+		});
+
+		builder.addCase(SaveUserAddress.pending, (state) => {
+			state.isSavingAddress = true;
+		});
+
+		builder.addCase(SaveUserAddress.fulfilled, (state, action) => {
+			console.log(action.payload)
+			state.isSavingAddress = false;
+			state.address.district = action.payload.district;
+			state.address.city = action.payload.city;
+            state.address.street = action.payload.street;
+            state.address.buildNumber = action.payload.buildNumber;
+			state.address.appartment = action.payload.appartment;
+			state.address.phone = action.payload.phone;
+			state.addressError = "";
+		});
+		builder.addCase(SaveUserAddress.rejected, (state, action) => {
+			state.isSavingAddress = false;
+			state.address.district = "";
+			state.address.city = "";
+            state.address.street = "";
+            state.address.buildNumber = "";
+			state.address.appartment = "";
+			state.address.phone = "";
+			state.addressError = action.payload;
 		});
 	},
 });

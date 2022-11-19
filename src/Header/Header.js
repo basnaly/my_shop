@@ -21,15 +21,18 @@ const Header = () => {
 				<Route path="/" element={<AddItemDialog />} />
 			</Routes>
 
-			{userId ? (
-				<UserDropdown />
-			) : (
-				<div className="d-flex align-items-center">
-					<Register />
-					<Login />
-				</div>
-			)}
-			<CartDropDown />
+			<div className="d-flex align-items-center">
+				<CartDropDown />
+
+				{userId ? (
+					<UserDropdown />
+				) : (
+					<div className="d-flex align-items-center ms-4">
+						<Register />
+						<Login />
+					</div>
+				)}
+			</div>
 		</HeaderStyled>
 	);
 };

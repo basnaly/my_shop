@@ -73,7 +73,9 @@ const Login = () => {
 					The log in form
 				</DialogTitleStyled>
 
-				<ErrorStyled className="d-flex ">{authError}</ErrorStyled>
+				<ErrorStyled className="">
+					{authError}
+				</ErrorStyled>
 
 				<div className="d-flex align-items-center">
 					<DialogContent
@@ -83,7 +85,6 @@ const Login = () => {
 							id="email"
 							label="Email"
 							type="email"
-							color="success"
 							value={email}
 							onChange={(e) =>
 								setEmailWithErrorClean(e.target.value)

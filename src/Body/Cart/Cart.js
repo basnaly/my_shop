@@ -1,15 +1,21 @@
 import React from "react";
-import { BasketButton } from "../../styles/MuiStyles";
+import {
+	BadgeCartStyled,
+	BadgeStyled,
+	BasketButton,
+} from "../../styles/MuiStyles";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddCartItem } from "../CartRedux";
 
-const Cart = ({item}) => {
+const Cart = ({ item }) => {
 
-	const dispatch = useDispatch()
+	const listCartItems = useSelector((state) => state?.cart?.listCartItems);
+	const cartItem = listCartItems.find((el) => el.itemName === item.itemName);
+
+	const dispatch = useDispatch();
 
 	const addCartItem = () => {
-
 		const cartData = {
 			outOfStock: item.outOfStock,
 			itemName: item.itemName,
@@ -18,11 +24,11 @@ const Cart = ({item}) => {
 			unit: item.unit,
 			note: item.note,
 			quantity: 1,
-			total: item.price
+			total: item.price,
 		};
 
-		dispatch(AddCartItem(cartData))
-	}
+		dispatch(AddCartItem(cartData));
+	};
 
 	return (
 		<div>
@@ -32,8 +38,17 @@ const Cart = ({item}) => {
 				onClick={addCartItem}
 				disabled={item.outOfStock === true}
 			>
-				<ShoppingBasketRoundedIcon />
-				
+				{item.outOfStock === true ? (
+					<BadgeStyled badgeContent={"Out of stock"} >
+						<ShoppingBasketRoundedIcon />
+					</BadgeStyled>
+				) : cartItem ? (
+					<BadgeCartStyled badgeContent={cartItem.quantity}>
+						<ShoppingBasketRoundedIcon />
+					</BadgeCartStyled>
+				) : (
+					<ShoppingBasketRoundedIcon />
+				)}
 			</BasketButton>
 		</div>
 	);

@@ -5,6 +5,7 @@ import { ClickAwayListener, Grow, IconButton, MenuList, Popper, Typography } fro
 import { PaperStyled, UserMenuStyled } from "../styles/MuiStyles";
 import Logout from "../Body/User/Logout";
 import { useNavigate } from "react-router";
+import AddressForm from "../Body/User/AddressForm";
 
 const UserDropdown = () => {
 
@@ -25,7 +26,6 @@ const UserDropdown = () => {
 
 		setOpen(false);
 	};
-
 	function handleListKeyDown(event) {
 		if (event.key === "Tab") {
 			event.preventDefault();
@@ -78,6 +78,7 @@ const UserDropdown = () => {
 				role={undefined}
 				placement="bottom-start"
 				transition
+				sx={{zIndex: 1}}
 			>
 				{({ TransitionProps, placement }) => (
 					<Grow
@@ -93,7 +94,6 @@ const UserDropdown = () => {
 							className="d-flex flex-column align-items-center"
 							elevation={8}
 						>
-							<ClickAwayListener onClickAway={handleClose}>
                                 <Typography as='div'>
 								<MenuList
 									className="d-flex flex-column align-items-center"
@@ -102,8 +102,7 @@ const UserDropdown = () => {
 									aria-labelledby="composition-button"
 									onKeyDown={handleListKeyDown}
 								>
-									<div>Hi {username} !</div>
-
+									Hi {username} !
 									<hr className="mx-2 my-1 w-100" />
 
 									<UserMenuStyled className="mt-2"
@@ -112,10 +111,11 @@ const UserDropdown = () => {
 										My orders
 									</UserMenuStyled>
 
+									<AddressForm />
+
 									<Logout />
 								</MenuList>
                                 </Typography>
-							</ClickAwayListener>
 						</PaperStyled>
 					</Grow>
 				)}

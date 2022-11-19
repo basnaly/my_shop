@@ -26,7 +26,7 @@ const AppMyShop = () => {
 		<BrowserRouter>
 			<MainStyled className="d-flex flex-column overflow-auto vh-100">
 				<ThemeProvider theme={myTheme} >
-					<Typography as='div' className="d-flex flex-column overflow-auto">
+					<Typography as='div' className="d-flex flex-column overflow-auto h-100">
 						<Header />
 
 						<Routes>

@@ -1,10 +1,10 @@
-import { styled, TableRow} from "@mui/material";
-import { Button, Box, DialogTitle, Paper} from "@mui/material";
+import { styled, TableRow } from "@mui/material";
+import { Button, Box, DialogTitle, Paper, Badge } from "@mui/material";
 
-export const MainStyled = styled('div')({
-    fontFamily: "'Spinnaker', sans-serif",
+export const MainStyled = styled("div")({
+	fontFamily: "'Spinnaker', sans-serif",
 	fontSize: "30px",
-		// backgroundColor: "gray",
+	// backgroundColor: "gray",
 });
 
 export const HeaderStyled = styled("div")({
@@ -88,7 +88,7 @@ export const IconItemStyled = styled("div")({
 
 export const BoxStyled = styled(Box)({
 	position: "relative",
-	border: '1px solid dimgray',
+	border: "1px solid dimgray",
 	borderRadius: "10px",
 });
 
@@ -103,9 +103,12 @@ export const ItemDataStyled = styled("div")({
 });
 
 export const ErrorStyled = styled("div")({
-	color: "red",
+	fontFamily: "'Spinnaker', sans-serif",
+	color: "#FF1493",
 	fontSize: "20px",
 	fontWeight: "bold",
+	textAlign: "center",
+	
 });
 
 export const UserMenuStyled = styled("div")({
@@ -120,30 +123,26 @@ export const UserMenuStyled = styled("div")({
 
 export const TotalStyled = styled("div")({
 	fontSize: "26px",
-
 });
 
 export const TotalSumStyled = styled("span")({
 	fontSize: "30px",
 	color: "#FF1493",
 	fontWeight: "bold",
-	
 });
 
 export const ItemCartStyled = styled("div")({
 	fontSize: "24px",
-
 });
 
 export const TitleCartStyled = styled("div")({
 	fontSize: "26px",
-	textDecoration: 'underline',
-
+	textDecoration: "underline",
 });
 
 export const OrderTitleStyled = styled("div")({
 	fontSize: "26px",
-	textDecoration: 'underline',	
+	textDecoration: "underline",
 });
 
 export const OrderDataStyled = styled("div")({
@@ -151,7 +150,38 @@ export const OrderDataStyled = styled("div")({
 });
 
 export const SpanOrderStyled = styled("span")({
-	color: '#FF1493',
+	color: "#FF1493",
 	fontWeight: "bold",
-	marginLeft: '10px',
+	marginLeft: "10px",
+});
+
+export const BadgeStyled = styled(Badge)({
+	"& .MuiBadge-badge": {
+		right: -40,
+		top: 5,
+		padding: "0 4px",
+		height: "40px",
+		width: "80px",
+		backgroundColor: "#FF1493",
+		color: "yellow",
+	},
+});
+
+export const BadgeCartStyled = styled(Badge)({
+	"& .MuiBadge-badge": {
+		right: -10,
+		top: -3,
+	},
+});
+
+export const AddAddressStyled = styled("div")({
+	color: "#FF1493",
+	textShadow: "1px 1px black"
+});
+
+export const DeliveryStyled = styled("div")({
+	color: "#FF1493",
+	// textShadow: "1px 1px black",
+	fontSize: "22px",
+	margin: "5px 0"
 });

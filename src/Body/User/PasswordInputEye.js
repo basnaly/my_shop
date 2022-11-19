@@ -27,30 +27,27 @@ const PasswordInputEye = ({ password, setPassword, mt = 2 }) => {
 		>
 			<InputLabel
 				htmlFor={id} // different id for different instances
-				color="success"
 				className="mx-3"
 			>
 				Password
 			</InputLabel>
 
 			<OutlinedInput
-				//inputProps={{ "data-testid": dataTestid }}
 				id={id}
 				type={showPassword ? "text" : "password"}
-				color="success"
 				className="mx-3"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 				endAdornment={
-					<InputAdornment position="end">
+					<InputAdornment position="end" >
 						<IconButton
 							data-testid="password-text"
 							aria-label="toggle password visibility"
 							onClick={handleClickShowPassword}
 							edge="end"
-							color="success"
 						>
-							{showPassword ? <VisibilityOff /> : <Visibility />}
+							{showPassword ? <VisibilityOff sx={{width: '30px', color: '#FF1493'}}/> 
+							: <Visibility sx={{width: '30px', color: '#FF1493'}}/>}
 						</IconButton>
 					</InputAdornment>
 				}

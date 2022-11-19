@@ -10,6 +10,7 @@ import {
 	Popper,
 } from "@mui/material";
 import {
+	AddAddressStyled,
 	PaperStyled,
 	TitleCartStyled,
 	TotalStyled,
@@ -21,21 +22,32 @@ import ListCartBox from "../Body/Cart/ListCartBox";
 import { useNavigate } from "react-router";
 import { CreateOrder } from "../Body/OrderRedux";
 import { ClearCart, GetCartList } from "../Body/CartRedux";
+import { DELIVERY_PRICE } from "../constants";
 
 const CartDropDown = () => {
 
 	const username = useSelector((state) => state?.user?.username);
 	const listCartItems = useSelector((state) => state?.cart?.listCartItems);
-	const listOrders = useSelector(state => state?.order?.listOrders)
+
+	const userDistrict = useSelector((state) => state?.user?.address?.district);
+	const deliveryPrice = DELIVERY_PRICE[userDistrict]
+	// const listOrders = useSelector((state) => state?.order?.listOrders);
+
+	const address = useSelector((state) => state?.user?.address);
+	const isAddressExists =
+		!!address.city &&
+		!!address.street &&
+		!!address.buildNumber &&
+		!!address.phone;
 
 	const [open, setOpen] = useState(false);
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
-	const totalSum = listCartItems
-		.reduce((prev, curr) => prev + curr.total, 0)
+	const totalSum = (+deliveryPrice + +listCartItems
+		.reduce((prev, curr) => prev + curr.total, 0))
 		.toFixed(2);
 
 	const anchorRef = useRef(null);
@@ -63,9 +75,9 @@ const CartDropDown = () => {
 
 	const createOrder = () => {
 		navigate("/orders");
-		setOpen(false)
-		dispatch(CreateOrder(totalSum))
-		dispatch(ClearCart())
+		setOpen(false);
+		dispatch(CreateOrder(totalSum));
+		dispatch(ClearCart());
 	};
 
 	// return focus to the button when we transitioned from !open -> open
@@ -78,11 +90,9 @@ const CartDropDown = () => {
 		prevOpen.current = open;
 	}, [open]);
 
-
 	useEffect(() => {
-		dispatch(GetCartList())
-		
-	}, [])
+		dispatch(GetCartList());
+	}, [username]);
 
 	return (
 		<div>
@@ -110,6 +120,7 @@ const CartDropDown = () => {
 				role={undefined}
 				placement="bottom-start"
 				transition
+				sx={{ zIndex: 1 }}
 			>
 				{({ TransitionProps, placement }) => (
 					<Grow
@@ -148,18 +159,28 @@ const CartDropDown = () => {
 											Your cart:
 										</TitleCartStyled>
 
-										<ListCartBox />
+										<ListCartBox deliveryPrice={deliveryPrice}/>
 									</div>
 
 									<YellowButton
 										variant={"outlined"}
 										className="mt-3 mb-2"
 										onClick={createOrder}
-										disabled={listCartItems.length === 0}
+										disabled={
+											listCartItems.length === 0 ||
+											!isAddressExists
+										}
 									>
 										Order
 									</YellowButton>
 
+									{!isAddressExists ? (
+										<AddAddressStyled>
+											Please add your address!
+										</AddAddressStyled>
+									) : (
+										""
+									)}
 								</MenuList>
 							</ClickAwayListener>
 						</PaperStyled>

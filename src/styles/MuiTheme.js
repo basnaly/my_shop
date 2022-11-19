@@ -57,7 +57,7 @@ export const myTheme = createTheme({
                 },
                 input: {
                     fontSize: '20px',
-                }
+                },
             }
         },
         MuiBadge: {
@@ -113,6 +113,27 @@ export const myTheme = createTheme({
             styleOverrides: {
                 label: {
                     fontSize: "16px",
+                }
+            }
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                notchedOutline: {
+                    borderColor: 'gray',
+                },
+            }
+        },
+        MuiInputBase: {
+            styleOverrides: {
+                input: {
+                    fontSize: "20px",
+                }
+            }
+        },
+        MuiSelect: {
+            styleOverrides: {
+                outlined: {
+                    padding: "10px",
                 }
             }
         }
