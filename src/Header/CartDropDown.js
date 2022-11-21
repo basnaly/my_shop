@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import {
 	AddAddressStyled,
+	LoginStyled,
 	PaperStyled,
 	TitleCartStyled,
 	TotalStyled,
@@ -23,15 +24,14 @@ import { useNavigate } from "react-router";
 import { CreateOrder } from "../Body/OrderRedux";
 import { ClearCart, GetCartList } from "../Body/CartRedux";
 import { DELIVERY_PRICE } from "../constants";
+import DeliveryTime from "./DeliveryTime";
 
 const CartDropDown = () => {
-
 	const username = useSelector((state) => state?.user?.username);
 	const listCartItems = useSelector((state) => state?.cart?.listCartItems);
 
 	const userDistrict = useSelector((state) => state?.user?.address?.district);
-	const deliveryPrice = DELIVERY_PRICE[userDistrict]
-	// const listOrders = useSelector((state) => state?.order?.listOrders);
+	const deliveryPrice = DELIVERY_PRICE[userDistrict];
 
 	const address = useSelector((state) => state?.user?.address);
 	const isAddressExists =
@@ -46,9 +46,10 @@ const CartDropDown = () => {
 
 	const dispatch = useDispatch();
 
-	const totalSum = (+deliveryPrice + +listCartItems
-		.reduce((prev, curr) => prev + curr.total, 0))
-		.toFixed(2);
+	const totalSum = (
+		+deliveryPrice +
+		+listCartItems.reduce((prev, curr) => prev + curr.total, 0)
+	).toFixed(2);
 
 	const anchorRef = useRef(null);
 
@@ -144,42 +145,54 @@ const CartDropDown = () => {
 									aria-labelledby="composition-button"
 									onKeyDown={handleListKeyDown}
 								>
-									<TotalStyled>
-										Total:
-										<TotalSumStyled className="mx-2">
-											{totalSum}
-										</TotalSumStyled>
-										€
-									</TotalStyled>
-
-									<hr className="mx-2 my-1 w-100" />
-
-									<div>
-										<TitleCartStyled className="text-center mb-2">
-											Your cart:
-										</TitleCartStyled>
-
-										<ListCartBox deliveryPrice={deliveryPrice}/>
-									</div>
-
-									<YellowButton
-										variant={"outlined"}
-										className="mt-3 mb-2"
-										onClick={createOrder}
-										disabled={
-											listCartItems.length === 0 ||
-											!isAddressExists
-										}
-									>
-										Order
-									</YellowButton>
-
-									{!isAddressExists ? (
-										<AddAddressStyled>
-											Please add your address!
-										</AddAddressStyled>
+									{!username ? (
+										<LoginStyled>Please login!</LoginStyled>
 									) : (
-										""
+										<div className="d-flex flex-column align-items-center">
+											<TotalStyled>
+												Total:
+												<TotalSumStyled className="mx-2">
+													{totalSum}
+												</TotalSumStyled>
+												€
+											</TotalStyled>
+
+											<hr className="mx-2 my-1 w-100" />
+
+											<div>
+												<TitleCartStyled className="text-center mb-2">
+													Your cart:
+												</TitleCartStyled>
+
+												<ListCartBox
+													deliveryPrice={
+														deliveryPrice
+													}
+												/>
+											</div>
+
+											<DeliveryTime />
+
+											<YellowButton
+												variant={"outlined"}
+												className="mt-3 mb-2"
+												onClick={createOrder}
+												disabled={
+													listCartItems.length ===
+														0 || !isAddressExists
+												}
+											>
+												Order
+											</YellowButton>
+
+											{!isAddressExists ? (
+												<AddAddressStyled>
+													Please add your address!
+												</AddAddressStyled>
+											) : (
+												""
+											)}
+										</div>
 									)}
 								</MenuList>
 							</ClickAwayListener>

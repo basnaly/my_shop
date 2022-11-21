@@ -12,11 +12,13 @@ export const DELIVERY_PRICE = {
 }
 
 export const DELIVERY_TIME = {
-    "Center": "1 day",
-    "South": "2 days",
-    "North": "2-3 days",
-    "Far North": "4 days",
+    "Center": 1,
+    "South": 2,
+    "North": 3,
+    "Far North": 4,
 }
+
+export const DATE_FORMAT = 'ddd, D MMM YY'
 
 export const validatePassword = (password) => {
 		

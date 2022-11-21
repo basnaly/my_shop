@@ -181,7 +181,16 @@ export const AddAddressStyled = styled("div")({
 
 export const DeliveryStyled = styled("div")({
 	color: "#FF1493",
-	// textShadow: "1px 1px black",
 	fontSize: "22px",
 	margin: "5px 0"
+});
+
+export const DeliveryTimeStyled = styled("div")({
+	fontSize: "22px",
+	margin: "5px 0"
+});
+
+export const LoginStyled = styled("div")({
+	fontSize: "22px",
+	fontFamily: "'Spinnaker', sans-serif",
 });
