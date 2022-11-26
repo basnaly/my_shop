@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import ListItems from "./ListItems";
+import DiscountNotification from "../DiscountNotification";
 
 const MainScreen = () => {
 
@@ -31,6 +32,9 @@ const MainScreen = () => {
                 <ListItems selectedTab={selectedTab}/>
 
 			</TabContext>
+
+			<DiscountNotification />
+
 		</React.Fragment>
 	);
 };

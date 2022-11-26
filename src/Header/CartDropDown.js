@@ -11,9 +11,11 @@ import {
 } from "@mui/material";
 import {
 	AddAddressStyled,
+	DeliveryStyled,
 	LoginStyled,
 	PaperStyled,
 	TitleCartStyled,
+	TotalDescriptionStyled,
 	TotalStyled,
 	TotalSumStyled,
 	YellowButton,
@@ -23,10 +25,12 @@ import ListCartBox from "../Body/Cart/ListCartBox";
 import { useNavigate } from "react-router";
 import { CreateOrder } from "../Body/OrderRedux";
 import { ClearCart, GetCartList } from "../Body/CartRedux";
-import { DELIVERY_PRICE } from "../constants";
+import { DELIVERY_PRICE, DISCOUNT } from "../constants";
 import DeliveryTime from "./DeliveryTime";
 
+
 const CartDropDown = () => {
+
 	const username = useSelector((state) => state?.user?.username);
 	const listCartItems = useSelector((state) => state?.cart?.listCartItems);
 
@@ -46,10 +50,23 @@ const CartDropDown = () => {
 
 	const dispatch = useDispatch();
 
-	const totalSum = (
-		+deliveryPrice +
-		+listCartItems.reduce((prev, curr) => prev + curr.total, 0)
-	).toFixed(2);
+	const cartSum = listCartItems.reduce((prev, curr) => prev + curr.total, 0)
+
+	let discountSum;
+	let discountPersent;
+
+    if (cartSum >= DISCOUNT[2].sum) {
+        discountSum = +(cartSum * DISCOUNT[2].discount).toFixed(2)
+		discountPersent = DISCOUNT[2].discount * 100
+    } else if (cartSum >= DISCOUNT[1].sum) {
+        discountSum = +(cartSum * DISCOUNT[1].discount).toFixed(2)
+		discountPersent = DISCOUNT[1].discount * 100
+    } else {
+        discountSum = +(cartSum * DISCOUNT[0].discount).toFixed(2)  
+		discountPersent = DISCOUNT[0].discount * 100
+    }
+
+	const totalSum = +(cartSum - discountSum + deliveryPrice).toFixed(2);
 
 	const anchorRef = useRef(null);
 
@@ -150,7 +167,10 @@ const CartDropDown = () => {
 									) : (
 										<div className="d-flex flex-column align-items-center">
 											<TotalStyled>
-												Total:
+												Total: 
+													<TotalDescriptionStyled>
+														Your cart - discount + delivery =
+													</TotalDescriptionStyled>
 												<TotalSumStyled className="mx-2">
 													{totalSum}
 												</TotalSumStyled>
@@ -172,6 +192,10 @@ const CartDropDown = () => {
 											</div>
 
 											<DeliveryTime />
+
+											<DeliveryStyled className="w-100 text-start">
+        										Discount {discountPersent}% = {discountSum}€
+    										</DeliveryStyled>
 
 											<YellowButton
 												variant={"outlined"}

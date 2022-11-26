@@ -6,7 +6,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import Header from "./Header/Header";
 import { MainStyled } from "./styles/MuiStyles";
 import Typography from "@mui/material/Typography";
-import ListItems from "./Body/Items/ListItems";
 import { useDispatch } from "react-redux";
 import { CheckUserWithBackend } from "./Body/UserRedux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";

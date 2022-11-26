@@ -1,11 +1,10 @@
-import { useTheme } from "@emotion/react";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
+	BadgeItemStyled,
 	BoxStyled,
 	ItemDataStyled,
 	ItemNameStyled,
-	PinkButton,
 } from "../../styles/MuiStyles";
 
 import Cart from "../Cart/Cart";
@@ -14,10 +13,9 @@ import DeleteItemDialog from "./DeleteItemDialog";
 import EditItemForm from "./EditItemForm";
 
 const ListItemBox = ({ item }) => {
-
 	const userId = useSelector((state) => state?.user?.userId);
 
-	return (
+	const boxStyledContent = (
 		<BoxStyled
 			boxShadow={24}
 			p={1}
@@ -50,6 +48,17 @@ const ListItemBox = ({ item }) => {
 				<Cart item={item} />
 			)}
 		</BoxStyled>
+	);
+
+	return item.discount.discountPrice > 0 ? (
+		<BadgeItemStyled
+			badgeContent={`${item.discount.discountPrice}€ for 
+				${item.discount.discountAmount} ${item.unit}`}
+		>
+			{boxStyledContent}
+		</BadgeItemStyled>
+	) : (
+		boxStyledContent
 	);
 };
 

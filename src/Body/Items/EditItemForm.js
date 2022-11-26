@@ -9,8 +9,8 @@ import {
 	MenuItem,
 	TextField,
 } from "@mui/material";
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import Slide from "@mui/material/Slide";
 
 import { PinkButton, YellowButton } from "../../styles/MuiStyles";
@@ -23,7 +23,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const EditItemForm = ({ item }) => {
-
+	
 	const [category, setCategory] = useState(item.category);
 	const [outOfStock, setOutOfStock] = useState(item.outOfStock);
 	const [itemName, setItemName] = useState(item.itemName);
@@ -31,6 +31,13 @@ const EditItemForm = ({ item }) => {
 	const [price, setPrice] = useState(item.price);
 	const [unit, setUnit] = useState(item.unit);
 	const [note, setNote] = useState(item.note);
+
+	const [discountAmount, setDiscountAmount] = useState(
+		item.discount.discountAmount
+	);
+	const [discountPrice, setDiscountPrice] = useState(
+		item.discount.discountPrice
+	);
 
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -50,6 +57,10 @@ const EditItemForm = ({ item }) => {
 				price,
 				unit,
 				note,
+				discount: {
+					discountAmount,
+					discountPrice,
+				},
 			})
 		);
 		setIsDialogOpen(false);
@@ -74,8 +85,6 @@ const EditItemForm = ({ item }) => {
 				open={isDialogOpen}
 				TransitionComponent={Transition}
 				onClose={closeDialog}
-				// aria-labelledby="alert-dialog-title"
-				// aria-describedby="alert-dialog-description"
 			>
 				<DialogTitle
 					// id="modal-modal-title"
@@ -83,7 +92,7 @@ const EditItemForm = ({ item }) => {
 					component="h2"
 					className="pb-1 m-1"
 				>
-					Edit item form
+					Edit item and add discount form
 				</DialogTitle>
 
 				<hr className="mx-2 my-0" />
@@ -93,17 +102,19 @@ const EditItemForm = ({ item }) => {
 						id="alert-dialog-slide-description"
 						className="text-center mt-0 mb-3"
 					>
-						Please fill all the fields
+						Edit form, please fill all the fields
 					</DialogContentText>
 
-					<div className="d-flex flex-column align-items-center m-1">
+					<div className="d-flex flex-column align-items-center">
 						<div className="d-flex align-items-center">
 							<TextField
+								className="mb-3"
 								margin="dense"
 								id="outlined-select-currency"
 								select
+								size="small"
 								label="Select categoty"
-								sx={{ width: "180px" }}
+								sx={{ width: "200px" }}
 								value={category}
 								onChange={(e) => setCategory(e.target.value)}
 							>
@@ -116,11 +127,14 @@ const EditItemForm = ({ item }) => {
 
 							<FormControlLabel
 								checked={outOfStock}
-								onChange={(e) => setOutOfStock(e.target.checked)}
+								onChange={(e) =>
+									setOutOfStock(e.target.checked)
+								}
 								control={
 									<Checkbox
-										sx={{"& .MuiSvgIcon-root": {
-												fontSize: 28,
+										sx={{
+											"& .MuiSvgIcon-root": {
+												fontSize: 22,
 											},
 										}}
 									/>
@@ -132,24 +146,28 @@ const EditItemForm = ({ item }) => {
 
 						<TextField
 							autoFocus
+							className="mb-3"
 							margin="dense"
 							id="itemName"
 							label="Item's name"
 							type="text"
+							size="small"
 							variant="outlined"
-							sx={{ width: "300px" }}
+							sx={{ width: "320px" }}
 							value={itemName}
 							onChange={(e) => setItemName(e.target.value)}
 						/>
 
 						<TextField
 							autoFocus
+							className="mb-3"
 							margin="dense"
 							id="itemImage"
 							label="Item's image"
 							type="url"
+							size="small"
 							variant="outlined"
-							sx={{ width: "300px" }}
+							sx={{ width: "320px" }}
 							value={image}
 							onChange={(e) => setImage(e.target.value)}
 						/>
@@ -161,18 +179,20 @@ const EditItemForm = ({ item }) => {
 								id="price"
 								label="Item's price"
 								type="number"
+								size="small"
 								variant="outlined"
 								sx={{ width: "150px" }}
 								value={price}
 								onChange={(e) => setPrice(e.target.value)}
 							/>
 
-							<div className="mx-2">per</div>
+							<div className="mx-3">per</div>
 
 							<TextField
 								margin="dense"
 								id="outlined-select-currency"
 								select
+								size="small"
 								label="Select unit"
 								sx={{ width: "110px" }}
 								value={unit}
@@ -191,13 +211,56 @@ const EditItemForm = ({ item }) => {
 							id="note"
 							label="Notes"
 							type="text"
+							size="small"
 							multiline
 							maxRows={4}
-							sx={{ width: "300px" }}
+							sx={{ width: "320px" }}
 							value={note}
 							onChange={(e) => setNote(e.target.value)}
 							variant="outlined"
 						/>
+					</div>
+
+					<hr className="mx-2 my-3" />
+
+					<DialogContentText
+						id="alert-dialog-slide-description"
+						className="text-center mt-0 mb-3"
+					>
+						Add discount form
+					</DialogContentText>
+
+					<div className="d-flex align-items-center justify-content-center">
+						<TextField
+							margin="dense"
+							id="discount-price"
+							label="Discount price"
+							type="number"
+							size="small"
+							variant="outlined"
+							sx={{ width: "120px" }}
+							value={discountPrice}
+							onChange={(e) => setDiscountPrice(e.target.value)}
+						/>
+
+						<div className="mx-2">€</div>
+
+						<div className="mx-2">for</div>
+
+						<TextField
+							className="me-2"
+							margin="dense"
+							id="discount-amount"
+							label="Amount"
+							type="number"
+							size="small"
+							variant="outlined"
+							sx={{ width: "100px" }}
+							value={discountAmount}
+							onChange={(e) => setDiscountAmount(e.target.value)}
+						/>
+
+						<div>{unit}</div>
 					</div>
 				</DialogContent>
 

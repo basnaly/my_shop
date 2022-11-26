@@ -133,7 +133,27 @@ export const myTheme = createTheme({
         MuiSelect: {
             styleOverrides: {
                 outlined: {
-                    padding: "10px",
+                    padding: "5px 10px",
+                }
+            }
+        },
+        MuiSnackbar:{
+            styleOverrides: {
+                root: {
+                    "& .MuiPaper-root": {
+                        backgroundColor: 'dimgray',
+                    }
+                }
+            }
+        },
+        MuiSnackbarContent: {
+            styleOverrides: {
+                action: {
+                    color: 'white',
+                },
+                message: {
+                    color: 'white',
+                    fontSize: '20px'
                 }
             }
         }

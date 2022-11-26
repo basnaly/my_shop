@@ -12,14 +12,16 @@ const initialState = {
 
 export const AddNewItem = createAsyncThunk(
 	"item/AddNewItem",
-	async ({ category, outOfStock, itemName, image, price, unit, note }, thunkAPI) => {
-
+	async (
+		{ category, outOfStock, itemName, image, price, unit, note },
+		thunkAPI
+	) => {
 		const itemData = {
 			category,
 			outOfStock,
-			itemName, 
+			itemName,
 			image,
-			price, 
+			price,
 			unit,
 			note,
 		};
@@ -29,13 +31,12 @@ export const AddNewItem = createAsyncThunk(
 				"/item/create",
 				{ item: itemData },
 				config()
-				
 			);
-			console.log(result)
+			console.log(result);
 
 			thunkAPI.dispatch(GetListItems());
 		} catch (error) {
-			thunkAPI.dispatch(CheckError(error?.response?.status))
+			thunkAPI.dispatch(CheckError(error?.response?.status));
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -44,16 +45,12 @@ export const AddNewItem = createAsyncThunk(
 export const GetListItems = createAsyncThunk(
 	"item/GetListItems",
 	async (_, thunkAPI) => {
-
 		try {
-			const result = await axios.get("/item/list-items", 
-			config()
-			);
+			const result = await axios.get("/item/list-items", config());
 
 			let listItems = result?.data?.listItems;
 
 			return listItems;
-
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
@@ -63,7 +60,6 @@ export const GetListItems = createAsyncThunk(
 export const DeleteItem = createAsyncThunk(
 	"item/DeleteItem",
 	async (itemId, thunkAPI) => {
-		
 		try {
 			const result = await axios.delete(
 				`/item/delete-item?itemId=${itemId}`,
@@ -72,7 +68,7 @@ export const DeleteItem = createAsyncThunk(
 
 			thunkAPI.dispatch(GetListItems());
 		} catch (error) {
-			thunkAPI.dispatch(CheckError(error?.response?.status))
+			thunkAPI.dispatch(CheckError(error?.response?.status));
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}
@@ -80,17 +76,36 @@ export const DeleteItem = createAsyncThunk(
 
 export const SaveEditedItem = createAsyncThunk(
 	"item/SaveEditedItem",
-	async ({ itemId, category, outOfStock, itemName, image, price, unit, note }, thunkAPI) => {
-
+	async (
+		{
+			itemId,
+			category,
+			outOfStock,
+			itemName,
+			image,
+			price,
+			unit,
+			note,
+			discount: { 
+				discountAmount, 
+				discountPrice 
+			},
+		},
+		thunkAPI
+	) => {
 		const editedItemData = {
 			category,
 			outOfStock,
-			itemName, 
+			itemName,
 			image,
-			price, 
+			price,
 			unit,
 			note,
-		}
+			discount: {
+				discountAmount,
+				discountPrice,
+			},
+		};
 
 		try {
 			const result = await axios.post(
@@ -100,9 +115,8 @@ export const SaveEditedItem = createAsyncThunk(
 			);
 
 			thunkAPI.dispatch(GetListItems());
-
 		} catch (error) {
-			thunkAPI.dispatch(CheckError(error?.response?.status))
+			thunkAPI.dispatch(CheckError(error?.response?.status));
 			return thunkAPI.rejectWithValue(error.response.data.message);
 		}
 	}

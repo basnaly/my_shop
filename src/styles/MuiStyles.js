@@ -1,10 +1,9 @@
-import { styled, TableRow } from "@mui/material";
+import { styled } from "@mui/material";
 import { Button, Box, DialogTitle, Paper, Badge } from "@mui/material";
 
 export const MainStyled = styled("div")({
 	fontFamily: "'Spinnaker', sans-serif",
 	fontSize: "30px",
-	// backgroundColor: "gray",
 });
 
 export const HeaderStyled = styled("div")({
@@ -99,7 +98,6 @@ export const ItemNameStyled = styled("div")({
 
 export const ItemDataStyled = styled("div")({
 	fontSize: "22px",
-	//fontWeight: "bold",
 });
 
 export const ErrorStyled = styled("div")({
@@ -193,4 +191,31 @@ export const DeliveryTimeStyled = styled("div")({
 export const LoginStyled = styled("div")({
 	fontSize: "22px",
 	fontFamily: "'Spinnaker', sans-serif",
+});
+
+export const DiscountButton = styled(Button)({
+	textTransform: "none",
+	border: "1px solid dimgray",
+	color: 'white',
+	fontSize: "24px",
+	backgroundColor: "dimgray",
+});
+
+export const FooterStyled = styled("div")({
+	backgroundColor: "lightgray",
+});
+
+export const TotalDescriptionStyled = styled("span")({
+	fontSize: "20px",
+	paddingLeft: "10px"
+});
+
+export const BadgeItemStyled = styled(Badge)({
+	"& .MuiBadge-badge": {
+		right: 30,
+		top: 30,
+		padding: "5px",
+		height: "40px",
+		width: "120px",
+	},
 });

@@ -20,6 +20,12 @@ export const DELIVERY_TIME = {
 
 export const DATE_FORMAT = 'ddd, D MMM YY'
 
+export const DISCOUNT = [
+    {sum: 15, discount: 0.05},
+    {sum: 25, discount: 0.07},
+    {sum: 50, discount: 0.1}
+]
+
 export const validatePassword = (password) => {
 		
     var regularExpression =
