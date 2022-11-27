@@ -11,7 +11,7 @@ import Slide from "@mui/material/Slide";
 
 import { useDispatch } from "react-redux";
 import { ItemNameStyled, PinkButton, YellowButton } from "../../styles/MuiStyles";
-import { DeleteItem, GetListItems } from "../ItemRedux";
+import { DeleteItem, GetListItems } from "../Redux/ItemRedux";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="down" ref={ref} {...props} />;

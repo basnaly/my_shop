@@ -9,9 +9,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
 import { PinkButton, UserMenuStyled, YellowButton } from "../../styles/MuiStyles";
-import { ResetUser } from "../UserRedux";
+import { ResetUser } from "../Redux/UserRedux";
 import { useNavigate } from "react-router";
-import { ClearCart } from "../CartRedux";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="down" ref={ref} {...props} />;
@@ -20,8 +19,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const Logout = () => {
 
     const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
-    const listCartItems = useSelector(state => state?.cart?.listCartItems)
-    // console.log(listCartItems)
     
     const openLogoutDialog = () => setIsLogoutDialogOpen(true);
     const closeLogoutDialog = () => setIsLogoutDialogOpen(false);

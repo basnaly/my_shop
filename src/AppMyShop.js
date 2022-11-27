@@ -7,11 +7,11 @@ import Header from "./Header/Header";
 import { MainStyled } from "./styles/MuiStyles";
 import Typography from "@mui/material/Typography";
 import { useDispatch } from "react-redux";
-import { CheckUserWithBackend } from "./Body/UserRedux";
+import { CheckUserWithBackend } from "./Body/Redux/UserRedux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import OrderScreen from "./Body/Orders/OrderScreen";
-import MainScreen from "./Body/Items/MainScreen";
-import { GetListItems } from "./Body/ItemRedux";
+import MainScreen from "./Body/MainScreen";
+import { GetListItems } from "./Body/Redux/ItemRedux";
 
 const AppMyShop = () => {
 	const dispatch = useDispatch();

@@ -6,10 +6,10 @@ import { Provider } from "react-redux";
 
 import reportWebVitals from "./reportWebVitals";
 import AppMyShop from "./AppMyShop";
-import ItemReducer from "./Body/ItemRedux";
-import UserReducer from "./Body/UserRedux";
-import CartReducer from "./Body/CartRedux";
-import OrderReducer from "./Body/OrderRedux";
+import ItemReducer from "./Body/Redux/ItemRedux";
+import UserReducer from "./Body/Redux/UserRedux";
+import CartReducer from "./Body/Redux/CartRedux";
+import OrderReducer from "./Body/Redux/OrderRedux";
 
 const logger = createLogger();
 

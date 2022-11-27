@@ -9,8 +9,6 @@ import {
 	MenuItem,
 	TextField,
 } from "@mui/material";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Slide from "@mui/material/Slide";
 
 import {
@@ -18,9 +16,8 @@ import {
 	UserMenuStyled,
 	YellowButton,
 } from "../../styles/MuiStyles";
-import { SaveEditedItem } from "../ItemRedux";
 import { useDispatch, useSelector } from "react-redux";
-import { SaveUserAddress } from "../UserRedux";
+import { SaveUserAddress } from "../Redux/UserRedux";
 import { DISTRICT } from "../../constants";
 
 const Transition = React.forwardRef(function Transition(props, ref) {

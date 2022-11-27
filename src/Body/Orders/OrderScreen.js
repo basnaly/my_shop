@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OrderTitleStyled } from "../../styles/MuiStyles";
-import { GetListOrders } from "../OrderRedux";
+import { GetListOrders } from "../Redux/OrderRedux";
 import ListOrders from "./ListOrders";
 
 const OrderScreen = () => {

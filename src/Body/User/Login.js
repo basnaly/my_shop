@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import { Dialog, DialogActions, DialogContent, TextField } from "@mui/material";
-import { LoginWithBackend, SetAuthError } from "../UserRedux";
-import { AuthButton, DialogTitleStyled, ErrorStyled, GreenFormButton, PinkButton, RedFormButton, YellowButton } from "../../styles/MuiStyles";
+import { LoginWithBackend, SetAuthError } from "../Redux/UserRedux";
+import { AuthButton, DialogTitleStyled, ErrorStyled, PinkButton, YellowButton } from "../../styles/MuiStyles";
 import PasswordInputEye from "./PasswordInputEye";
 
 const Login = () => {
 
-	// const userId = useSelector((state) => state?.user?.userId);
 	const authError = useSelector((state) => state?.user?.authError);
 	const isAuthLoading = useSelector((state) => state?.user?.isAuthLoading);
 

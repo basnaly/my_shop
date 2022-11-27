@@ -20,7 +20,7 @@ const ListItemBox = ({ item }) => {
 			boxShadow={24}
 			p={1}
 			className="d-flex flex-column position-relative align-items-center m-3 mt-4"
-			sx={{ width: "250px", backgroundColor: "linen" }}
+			sx={{ width: "250px", backgroundColor: item.outOfStock ? "lightgray" : "linen" }}
 		>
 			<ItemNameStyled className="m-2">{item.itemName}</ItemNameStyled>
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import config from "../config";
+import config from "../../config";
 import { CheckError } from "./UserRedux";
 
 const initialState = {

@@ -4,8 +4,8 @@ import { Dialog, DialogActions, DialogContent, TextField } from "@mui/material";
 
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RegisterWithBackend, SetAuthError } from "../UserRedux";
-import { AuthButton, DialogTitleStyled, ErrorStyled, GreenFormButton, PinkButton, RedFormButton, YellowButton } from "../../styles/MuiStyles";
+import { RegisterWithBackend, SetAuthError } from "../Redux/UserRedux";
+import { AuthButton, DialogTitleStyled, ErrorStyled, PinkButton, YellowButton } from "../../styles/MuiStyles";
 import PasswordInputEye from "./PasswordInputEye";
 import { useSelector } from "react-redux";
 import { validatePassword } from "../../constants";

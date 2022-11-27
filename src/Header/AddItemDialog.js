@@ -14,7 +14,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Slide from "@mui/material/Slide";
 
 import { PinkButton, YellowButton } from "../styles/MuiStyles";
-import { AddNewItem, GetListItems } from "../Body/ItemRedux";
+import { AddNewItem, GetListItems } from "../Body/Redux/ItemRedux";
 import { useDispatch } from "react-redux";
 import { CATEGORY, UNITS } from "../constants";
 

@@ -154,21 +154,44 @@ export const SpanOrderStyled = styled("span")({
 });
 
 export const BadgeStyled = styled(Badge)({
-	"& .MuiBadge-badge": {
-		right: -40,
+	"&>.MuiBadge-badge": { // direct child of Badge
+		right: -10,
 		top: 5,
 		padding: "0 4px",
-		height: "40px",
-		width: "80px",
+		height: "auto",
+		width: "auto",
 		backgroundColor: "#FF1493",
 		color: "yellow",
 	},
 });
 
+export const BadgeItemStyled = styled(Badge)({
+	"&>.MuiBadge-badge": { //
+		right: '50%',
+		top: 25,
+		padding: "5px",
+		height: "auto",
+		width: "auto",
+	},
+});
+
 export const BadgeCartStyled = styled(Badge)({
-	"& .MuiBadge-badge": {
+	"&>.MuiBadge-badge": {
 		right: -10,
 		top: -3,
+	},
+});
+
+export const BadgeOutOfStockStyled = styled(Badge)({ 
+	"&>.MuiBadge-badge": { // BadgeOutOfStock
+		right: "50%",
+		top: 25,
+		padding: "5px",
+		height: "auto",
+		width: "auto",
+		backgroundColor: "gray",
+		color: "white",
+		whiteSpace: 'nowrap',
 	},
 });
 
@@ -210,12 +233,3 @@ export const TotalDescriptionStyled = styled("span")({
 	paddingLeft: "10px"
 });
 
-export const BadgeItemStyled = styled(Badge)({
-	"& .MuiBadge-badge": {
-		right: 30,
-		top: 30,
-		padding: "5px",
-		height: "40px",
-		width: "120px",
-	},
-});

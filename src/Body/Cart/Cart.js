@@ -1,12 +1,11 @@
 import React from "react";
 import {
 	BadgeCartStyled,
-	BadgeStyled,
 	BasketButton,
 } from "../../styles/MuiStyles";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 import { useDispatch, useSelector } from "react-redux";
-import { AddCartItem } from "../CartRedux";
+import { AddCartItem } from "../Redux/CartRedux";
 
 const Cart = ({ item }) => {
 
@@ -36,13 +35,9 @@ const Cart = ({ item }) => {
 				variant={"outlined"}
 				className=" mb-3"
 				onClick={addCartItem}
-				disabled={item.outOfStock === true}
+				disabled={item.outOfStock}
 			>
-				{item.outOfStock === true ? (
-					<BadgeStyled badgeContent={"Out of stock"} >
-						<ShoppingBasketRoundedIcon />
-					</BadgeStyled>
-				) : cartItem ? (
+				{cartItem ? (
 					<BadgeCartStyled badgeContent={cartItem.quantity}>
 						<ShoppingBasketRoundedIcon />
 					</BadgeCartStyled>

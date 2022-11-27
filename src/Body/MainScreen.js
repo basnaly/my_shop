@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
-import ListItems from "./ListItems";
-import DiscountNotification from "../DiscountNotification";
+import ListItems from "./Items/ListItems";
+import DiscountNotification from "./DiscountNotification";
 
 const MainScreen = () => {
 
@@ -24,9 +24,10 @@ const MainScreen = () => {
 						onChange={handleChange}
 						aria-label="lab API tabs example"    
 					>
-						<Tab label="Vegetables" value={"Vegetables"}/>
-						<Tab label="Fruits" value={"Fruits"}/>
-						<Tab label="Dairy" value={"Dairy"}/>
+						<Tab label="Vegetables" value={"Vegetables"} />
+						<Tab label="Fruits" value={"Fruits"} />
+						<Tab label="Dairy" value={"Dairy"} />
+						<Tab label="Discounts" value={"Discounts"} />
 					</TabList>
 				</Box>
                 <ListItems selectedTab={selectedTab}/>
