@@ -15,18 +15,16 @@ import {
 	LoginStyled,
 	PaperStyled,
 	TitleCartStyled,
-	TotalDescriptionStyled,
-	TotalStyled,
-	TotalSumStyled,
 	YellowButton,
 } from "../styles/MuiStyles";
 import { useDispatch, useSelector } from "react-redux";
 import ListCartBox from "../Body/Cart/ListCartBox";
 import { useNavigate } from "react-router";
-import { CreateOrder } from "../Body/OrderRedux";
-import { ClearCart, GetCartList } from "../Body/CartRedux";
+import { CreateOrder } from "../Body/Redux/OrderRedux";
+import { ClearCart, GetCartList } from "../Body/Redux/CartRedux";
 import { DELIVERY_PRICE, DISCOUNT } from "../constants";
 import DeliveryTime from "./DeliveryTime";
+import TotalSum from "./TotalSum";
 
 
 const CartDropDown = () => {
@@ -166,32 +164,18 @@ const CartDropDown = () => {
 										<LoginStyled>Please login!</LoginStyled>
 									) : (
 										<div className="d-flex flex-column align-items-center">
-											<TotalStyled>
-												Total: 
-													<TotalDescriptionStyled>
-														Your cart - discount + delivery =
-													</TotalDescriptionStyled>
-												<TotalSumStyled className="mx-2">
-													{totalSum}
-												</TotalSumStyled>
-												€
-											</TotalStyled>
 
-											<hr className="mx-2 my-1 w-100" />
+											<TotalSum totalSum={totalSum} isAddressExists={isAddressExists}/>
 
 											<div>
 												<TitleCartStyled className="text-center mb-2">
 													Your cart:
 												</TitleCartStyled>
 
-												<ListCartBox
-													deliveryPrice={
-														deliveryPrice
-													}
-												/>
+												<ListCartBox />
 											</div>
 
-											<DeliveryTime />
+											<DeliveryTime deliveryPrice={ deliveryPrice} isAddressExists={isAddressExists}/>
 
 											<DeliveryStyled className="w-100 text-start">
         										Discount {discountPersent}% = {discountSum}€

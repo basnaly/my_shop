@@ -14,7 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Slide from "@mui/material/Slide";
 
 import { PinkButton, YellowButton } from "../../styles/MuiStyles";
-import { SaveEditedItem } from "../ItemRedux";
+import { SaveEditedItem } from "../Redux/ItemRedux";
 import { useDispatch } from "react-redux";
 import { CATEGORY, UNITS } from "../../constants";
 
@@ -69,6 +69,15 @@ const EditItemForm = ({ item }) => {
 	const closeForm = () => {
 		setIsDialogOpen(false);
 	};
+
+	const changeOutOfStock = e => {
+		setOutOfStock(e.target.checked)
+
+		if (e.target.checked) {
+			setDiscountAmount('')
+			setDiscountPrice('')
+		}
+	}
 
 	return (
 		<React.Fragment>
@@ -127,9 +136,7 @@ const EditItemForm = ({ item }) => {
 
 							<FormControlLabel
 								checked={outOfStock}
-								onChange={(e) =>
-									setOutOfStock(e.target.checked)
-								}
+								onChange={ changeOutOfStock }
 								control={
 									<Checkbox
 										sx={{
@@ -239,6 +246,7 @@ const EditItemForm = ({ item }) => {
 							size="small"
 							variant="outlined"
 							sx={{ width: "120px" }}
+							disabled={outOfStock}
 							value={discountPrice}
 							onChange={(e) => setDiscountPrice(e.target.value)}
 						/>
@@ -256,6 +264,7 @@ const EditItemForm = ({ item }) => {
 							size="small"
 							variant="outlined"
 							sx={{ width: "100px" }}
+							disabled={outOfStock}
 							value={discountAmount}
 							onChange={(e) => setDiscountAmount(e.target.value)}
 						/>

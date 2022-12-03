@@ -13,6 +13,7 @@ import DeleteItemDialog from "./DeleteItemDialog";
 import EditItemForm from "./EditItemForm";
 
 const ListItemBox = ({ item }) => {
+	
 	const userId = useSelector((state) => state?.user?.userId);
 
 	const boxStyledContent = (
